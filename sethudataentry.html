@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SETHU</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dailywork.css">
+    <link rel="icon" type="image/x-icon" href="SETHU.png">
+</head>
+
+<body style="background-color: antiquewhite;">
+    <div id="home">
+        <div id="com">
+            <img src="SETHU-removebg-preview.png" style="padding-left: 20px;" height="150px">
+            <h1 style="color: rgb(49, 141, 49); padding-top: 30px;">Skill Enhancement Training And Hands-on
+                Understanding</h1>
+        </div>
+        <h1 align="center">Company Ledger</h1>
+    </div>
+    <div id="formContainer">
+        <form id="userForm">
+            <input type="date" id="dat" name="dat" placeholder="Date" required>
+            <select id="type" required>
+                <option hidden>Select Purpose Type</option>
+                <option>Contract</option>
+                <option>Expenses</option>
+            </select>
+            <select id="name" required>
+                <option hidden>Select Staff Name</option>
+                <option>Ram lal Suresh</option>
+                <option>Sanjay</option>
+            </select>
+            <input type="text" id="use" name="use" style="display: none;" placeholder="Purpose Of Use" required>
+            <input type="text" id="day" name="day" style="display: none;" placeholder="Number of days" required>
+            <select id="clg" required>
+                <option hidden>Select College Name</option>
+                <option>RIET</option>
+                <option>BVC</option>
+                <option>GIET</option>
+            </select>
+            <input type="text" id="wid" name="wid" placeholder="Id" required>
+            <input type="text" id="rate" name="rate" placeholder="Price" required>
+
+            <div id="btn">
+                <input type="button" value="Add Data" id="submit">
+                <input type="button" value="Retrive Data" id="submit1">
+            </div>
+        </form>
+    </div>
+    <div>
+        <input type="text" placeholder="Search Box" id="search">
+    </div>
+    <div id="retrive">
+
+    </div>
+    <div id="tally">
+
+    </div>
+    <img src="done1.png" id="done" style="display: none;" height="100px" width="100px">
+
+    <!-- Load the main script as a module -->
+    <script type="module" src="sethudailyworkdatabase.js"></script>
+    <script type="module" src="sethuworkid.js"></script>
+    <script type="module" src="sethudataretrive.js"></script>
+</body>
+
+</html>
