@@ -108,13 +108,16 @@ function generateTable(data) {
     let led = `<table border="1px">
      <tr>
         <th id="bal1">Total Income</th>
+        <th id="bal1">Averge Income Per Head</th>
         <th id="bal1">Ramlal Expenses</th>
         <th id="bal1">Sanjay Expenses</th>
         <th id="bal1">Total Expenses</th>
         <th id="bal1">Total Profit</th>
     </tr>`;
+    var avg=((totalcontarct - totalexpenses)/daycount)/2;
     led += `<tr>
     <td class="lsize">${totalcontarct}</td>
+    <td class="lsize">${avg}</td>
     <td class="lsize">${ram}</td>
     <td class="lsize">${sanjay}</td>
     <td class="lsize">${totalexpenses}</td>
