@@ -36,7 +36,7 @@ img {
 table {
     width: 100%;
     border-collapse: collapse;
-    border-spacing: 10px
+    border-spacing: 30px
 }
 
 #am {
@@ -109,6 +109,18 @@ select {
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 18px;
+}
+
+input[type="checkbox"] {
+    /* Method 1: Using transform scale */
+    transform: scale(1.5); /* Increase to 1.5 times its original size */
+    -webkit-transform: scale(1.5); /* For Safari/older WebKit browsers */
+    margin-right: 40px;
+    height: 20px;
+    width: 20px; /* Optional: Add space between checkbox and label */
+
+    /* Method 2: Using zoom (for compatibility) */
+    /* zoom: 1.5; */
 }
 
 .modal {
