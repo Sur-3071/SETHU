@@ -17,18 +17,21 @@ document.getElementById("type").addEventListener("change", async function (e1) {
 
     e1.preventDefault(); // Prevent default form submission behavior
     var typ = document.getElementById("type").value;
-    console.log(typ);
     try {
         // Access the database and retrieve data
-        if(typ==="Expenses")
-        {
-            document.getElementById("use").style.display="block";
-            document.getElementById("day").style.display="none";
+        if (typ === "Expenses") {
+            document.getElementById("use").style.display = "block";
+            document.getElementById("day").style.display = "none";
+            document.getElementById("name").style.display = "block";
+            document.getElementById("submit2").style.display = "none";
+            document.getElementById("clg").style.display = "none";
         }
-        else
-        {
-            document.getElementById("use").style.display="none";
-            document.getElementById("day").style.display="block";
+        else {
+            document.getElementById("use").style.display = "none";
+            document.getElementById("day").style.display = "block";
+            document.getElementById("name").style.display = "none";
+            document.getElementById("submit2").style.display = "block";
+            document.getElementById("clg").style.display = "block";
         }
         const db2 = getDatabase(app);
         const db1 = "Work_Count";
@@ -44,6 +47,29 @@ document.getElementById("type").addEventListener("change", async function (e1) {
         }
     } catch (error) {
         console.error("Error occurred while fetching data: ", error);
+    }
+});
+
+document.addEventListener("click", function (e1) {
+    var btn = document.getElementById("submit2");
+    var modal = document.getElementById("myModal"); // Assuming modal has this ID
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
 });
 
