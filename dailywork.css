@@ -213,6 +213,6 @@ input[type="button"]:hover {
 @media (max-width: 450px) {
     h1
     {
-        font-size: 20px;
+        font-size: 15px;
     }
 }
