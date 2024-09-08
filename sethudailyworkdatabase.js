@@ -17,25 +17,38 @@ const db = getDatabase(app);
 
 document.getElementById('submit').addEventListener('click', async function (e) {
     e.preventDefault();
+    var checkboxes = document.querySelectorAll('input[name="vehicle"]:checked');
+    
+    // Create an array from the selected checkboxes' values
+    var selectedValues = Array.from(checkboxes).map(function (checkbox) {
+        return checkbox.value;
+    });
 
+    // Join the values into a single string with new lines
+    var selectedString = selectedValues.join(',');  // You can use ', ' or any other delimiter
+    
+    // Log the string to the console or display it
+    console.log(selectedString);
     const dat = document.getElementById("dat").value;
     const wid = document.getElementById("wid").value;
-    const name = document.getElementById("name").value;
-    const clg = document.getElementById("clg").value;
+    var name = document.getElementById("name").value;
+    var clg = document.getElementById("clg").value;
     var pur=document.getElementById("use").value;
     var type = document.getElementById("type").value;
     const rate = document.getElementById("rate").value;
-    const days = document.getElementById("day").value;
+    var days = document.getElementById("day").value;
     document.getElementById("userForm").reset();
     if (type === "Contract") {
         var exp = 0;
         var con = rate;
         pur="--"
+        name=selectedString;
     }
     else {
         var exp = rate;
         var con = 0;
-        days="--";
+        days=0;
+        clg="--";
     }
     if (dat.length > 0) {
         if (name !== "Select Staff Name") {
@@ -99,3 +112,9 @@ document.getElementById('submit').addEventListener('click', async function (e) {
         alert("Please Choose Date");
     }
 });
+function removedone() {
+    setTimeout(function () {
+        var v7 = document.getElementById("done");
+        v7.style.display = "none";
+    }, 3000);
+}
