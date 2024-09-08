@@ -210,3 +210,9 @@ input[type="button"] {
 input[type="button"]:hover {
     background-color: #0056b3;
 }
+@media (max-width: 450px) {
+    h1
+    {
+        font-size: 20px;
+    }
+}
