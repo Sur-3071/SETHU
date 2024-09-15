@@ -114,7 +114,7 @@ function generateTable(data) {
         <th id="bal1">Total Expenses</th>
         <th id="bal1">Total Profit</th>
     </tr>`;
-    var avg=((totalcontarct - totalexpenses)/daycount)/2;
+    var avg=parseInt(((totalcontarct - totalexpenses)/daycount)/2);
     led += `<tr>
     <td class="lsize">${totalcontarct}</td>
     <td class="lsize">${avg}</td>
