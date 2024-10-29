@@ -18,7 +18,7 @@ const db = getDatabase(app);
 document.getElementById('submit').addEventListener('click', async function (e) {
     e.preventDefault();
     var checkboxes = document.querySelectorAll('input[name="vehicle"]:checked');
-    
+
     // Create an array from the selected checkboxes' values
     var selectedValues = Array.from(checkboxes).map(function (checkbox) {
         return checkbox.value;
@@ -26,14 +26,14 @@ document.getElementById('submit').addEventListener('click', async function (e) {
 
     // Join the values into a single string with new lines
     var selectedString = selectedValues.join(',');  // You can use ', ' or any other delimiter
-    
+
     // Log the string to the console or display it
     console.log(selectedString);
     const dat = document.getElementById("dat").value;
     const wid = document.getElementById("wid").value;
     var name = document.getElementById("name").value;
     var clg = document.getElementById("clg").value;
-    var pur=document.getElementById("use").value;
+    var pur = document.getElementById("use").value;
     var type = document.getElementById("type").value;
     const rate = document.getElementById("rate").value;
     var days = document.getElementById("day").value;
@@ -41,14 +41,26 @@ document.getElementById('submit').addEventListener('click', async function (e) {
     if (type === "Contract") {
         var exp = 0;
         var con = rate;
-        pur="--"
-        name=selectedString;
+        pur = "--"
+        name = selectedString;
+        var tax=0;
     }
     else {
-        var exp = rate;
-        var con = 0;
-        days=0;
-        clg="--";
+        if (type === "Expenses") {
+            var exp = rate;
+            var con = 0;
+            days = 0;
+            clg = "--";
+            var tax=0;
+        }
+        else {
+            var exp = 0;
+            var con = 0;
+            pur = "--"
+            name = "--";
+            days=0;
+            var tax=rate;
+        }
     }
     if (dat.length > 0) {
         if (name !== "Select Staff Name") {
@@ -71,16 +83,17 @@ document.getElementById('submit').addEventListener('click', async function (e) {
                             if (sethuid == wid) {
                                 await set(w_id, {
                                     Sethu_Id: parseInt(wid) + 1,
-                                    Work_Id:parseInt(workid)
+                                    Work_Id: parseInt(workid)
                                 });
                             }
                             await set(dataRefset, {
                                 Date: dat,
                                 Name: name,
                                 College: clg,
-                                Days:days,
-                                Purpose:pur,
-                                Expenses:exp,
+                                Days: days,
+                                Purpose: pur,
+                                Expenses: exp,
+                                Tax:tax,
                                 Contract: con,
                                 Price: rate
                             });
