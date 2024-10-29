@@ -25,7 +25,8 @@
             <select id="type" required>
                 <option hidden>Select Purpose Type</option>
                 <option>Contract</option>
-                <option>Expenses</option>
+                <option>Expenses</ption>
+                <option>Tax</option>s
             </select>
             <select id="name"  style="display: none;" required>
                 <option hidden>Select Staff Name</option>
@@ -39,8 +40,9 @@
                 <option>RIET</option>
                 <option>BVC</option>
                 <option>GIET</option>
+                <option>ISTS</option>
             </select>
-            <input type="text" id="wid" name="wid" placeholder="Id" readonly required>
+            <input type="text" id="wid" name="wid" placeholder="Id" required>
             <input type="text" id="rate" name="rate" placeholder="Price" required>
             <input type="button" value="Add Staff Names"   style="display: none;" id="submit2">
             <div id="btn">
@@ -52,7 +54,7 @@
     <div id="myModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-            <h1 align="center" style="color: red;">Select Staff Members</h1>
+            <h2 align="center" style="color: red;">Select Staff Members</h2>
             <span class="close">&times;</span>
             <div id="formContainer">
                 <table>
