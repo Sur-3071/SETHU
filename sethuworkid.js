@@ -27,11 +27,21 @@ document.getElementById("type").addEventListener("change", async function (e1) {
             document.getElementById("clg").style.display = "none";
         }
         else {
-            document.getElementById("use").style.display = "none";
-            document.getElementById("day").style.display = "block";
-            document.getElementById("name").style.display = "none";
-            document.getElementById("submit2").style.display = "block";
-            document.getElementById("clg").style.display = "block";
+            if (typ === "Contract") {
+                document.getElementById("use").style.display = "none";
+                document.getElementById("day").style.display = "block";
+                document.getElementById("name").style.display = "none";
+                document.getElementById("submit2").style.display = "block";
+                document.getElementById("clg").style.display = "block";
+            }
+            else
+            {
+                document.getElementById("use").style.display = "none";
+                document.getElementById("day").style.display = "none";
+                document.getElementById("name").style.display = "none";
+                document.getElementById("submit2").style.display = "none";
+                document.getElementById("clg").style.display = "block";
+            }
         }
         const db2 = getDatabase(app);
         const db1 = "Work_Count";
@@ -41,6 +51,7 @@ document.getElementById("type").addEventListener("change", async function (e1) {
         // Check if data exists
         if (snapshot.exists()) {
             const data = snapshot.val();
+            console.log(data);
             document.getElementById("wid").value = data["Sethu_Id"];
         } else {
             alert("No data available");
