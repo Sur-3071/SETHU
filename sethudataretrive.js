@@ -52,19 +52,21 @@ function generateTable(data) {
         <tr>
             <th>Work Id</th>
             <th id="csize1">Date</th>
-            <th id="csize3">Staff Name</th>
-            <th id="csize2">College Name</th>
-            <th id="csize2">Purpose</th>
-            <th id="csize2">Days</th>
-            <th id="csize2">Expenses</th>
-            <th id="csize2">Contract</th>
+            <th id="csize">Staff Name</th>
+            <th id="csize">College Name</th>
+            <th id="csize">Purpose</th>
+            <th id="csize">Days</th>
+            <th id="csize">Expenses</th>
+            <th id="csize">Tax</th>
+            <th id="csize">Contract</th>
         </tr>`;
     var totalcontarct = 0;
     var totalexpenses = 0;
+    var taxes = 0;
     var ram = 0;
     var sanjay = 0;
     var amount = 0;
-    var daycount=0;
+    var daycount = 0;
     for (const customerPhone in data) {
         if (data.hasOwnProperty(customerPhone)) {
             const activity = data[customerPhone];
@@ -82,8 +84,9 @@ function generateTable(data) {
             if (activity.Expenses === 0) {
                 totalcontarct += parseInt(activity.Contract)
             }
+            taxes += parseInt(activity.Tax);
             amount += parseInt(activity.Price);
-            daycount+=parseInt(activity.Days);
+            daycount += parseInt(activity.Days);
             out += `<tr>
                         <td>${customerPhone}</td>
                         <td>${activity.Date}</td>
@@ -92,6 +95,7 @@ function generateTable(data) {
                         <td>${activity.Purpose}</td>
                         <td>${activity.Days}</td>
                         <td>${activity.Expenses}</td>
+                        <td>${activity.Tax}</td>
                         <td>${activity.Contract}</td>
                     </tr>`;
         }
@@ -100,6 +104,7 @@ function generateTable(data) {
     <td colspan="5" id="col">Total Work Analaysis</td>
     <td id="am">${daycount}</td>
     <td id="am">${totalexpenses}</td>
+     <td id="am">${taxes}</td>
     <td id="am">${totalcontarct}</td>
     </tr>`;
     out += `</table>`;
@@ -111,15 +116,17 @@ function generateTable(data) {
         <th id="bal1">Averge Income Per Head</th>
         <th id="bal1">Ramlal Expenses</th>
         <th id="bal1">Sanjay Expenses</th>
+        <th id="bal1">Tax</th>
         <th id="bal1">Total Expenses</th>
         <th id="bal1">Total Profit</th>
     </tr>`;
-    var avg=parseInt(((totalcontarct - totalexpenses)/daycount)/2);
+    var avg = parseInt(((totalcontarct - totalexpenses - taxes) / daycount) / 2);
     led += `<tr>
     <td class="lsize">${totalcontarct}</td>
     <td class="lsize">${avg}</td>
     <td class="lsize">${ram}</td>
     <td class="lsize">${sanjay}</td>
+    <td class="lsize">${taxes}</td>
     <td class="lsize">${totalexpenses}</td>
     <td>${totalcontarct - totalexpenses}</td>
     </tr>`;
@@ -159,32 +166,45 @@ function SearchTable(data) {
     var d = document.getElementById("tally");
     var name = document.getElementById("search").value;
     if (name.length > 0) {
-        d.style.display = "none";
+        // d.style.display = "none";
         let out = `<table border="1px">
        <tr>
             <th>Work Id</th>
             <th id="csize1">Date</th>
-            <th id="csize3">Staff Name</th>
-            <th id="csize2">College Name</th>
-            <th id="csize2">Purpose</th>
-            <th id="csize2">Days</th>
-            <th id="csize2">Expenses</th>
-            <th id="csize2">Contract</th>
+            <th id="csize">Staff Name</th>
+            <th id="csize">College Name</th>
+            <th id="csize">Purpose</th>
+            <th id="csize">Days</th>
+            <th id="csize">Tax</th>
+            <th id="csize">Contract</th>
         </tr>`;
         var totalexpenses = 0;
         var totalcontarct = 0;
-        var daycount=0;
+        var taxes = 0;
+        var daycount = 0;
+        var ram = 0;
+        var sanjay = 0;
         for (const customerPhone in data) {
             if (data.hasOwnProperty(customerPhone)) {
                 const activity = data[customerPhone];
                 if (activity.Name.indexOf(name) !== -1 || activity.College.indexOf(name) !== -1) {
+
+                    if (activity.Name === "Ram lal Suresh" && activity.Expenses !== "--") {
+                        ram += parseInt(activity.Expenses);
+                    }
+                    else {
+                        if (activity.Name === "Sanjay" && activity.Expenses !== "--") {
+                            sanjay += parseInt(activity.Expenses);
+                        }
+                    }
                     if (activity.Contract === 0) {
                         totalexpenses += parseInt(activity.Expenses)
                     }
                     if (activity.Expenses === 0) {
                         totalcontarct += parseInt(activity.Contract)
                     }
-                    daycount+=parseInt(activity.Days);
+                    taxes += parseInt(activity.Tax);
+                    daycount += parseInt(activity.Days);
                     out += `<tr>
                         <td>${customerPhone}</td>
                         <td>${activity.Date}</td>
@@ -192,7 +212,7 @@ function SearchTable(data) {
                         <td>${activity.College}</td>
                         <td>${activity.Purpose}</td>
                         <td>${activity.Days}</td>
-                        <td>${activity.Expenses}</td>
+                        <td>${activity.Tax}</td>
                         <td>${activity.Contract}</td>
                     </tr>`;
                 }
@@ -202,11 +222,27 @@ function SearchTable(data) {
         out += `<tr>
     <td colspan="5" id="col">Total Work Analaysis</td>
     <td id="am">${daycount}</td>
-    <td id="am">${totalexpenses}</td>
+    <td id="am">${taxes}</td>
     <td id="am">${totalcontarct}</td>
     </tr>`;
         out += `</table>`;
         document.getElementById("retrive").innerHTML = out;
+    let led = `<table border="1px">
+     <tr>
+        <th id="bal1">Total Income</th>
+        <th id="bal1">Averge Income Per Head</th>
+        <th id="bal1">Tax</th>
+        <th id="bal1">Total Profit</th>
+    </tr>`;
+        var avg = parseInt(((totalcontarct - taxes) / daycount) / 2);
+        led += `<tr>
+    <td class="lsize">${totalcontarct}</td>
+    <td class="lsize">${avg}</td>
+    <td class="lsize">${taxes}</td>
+    <td>${totalcontarct - taxes}</td>
+    </tr>`;
+        led += `</table>`;
+        document.getElementById("tally").innerHTML = led;
     }
     else {
         d.style.display = "block";
