@@ -128,7 +128,7 @@ function generateTable(data) {
     <td class="lsize">${sanjay}</td>
     <td class="lsize">${taxes}</td>
     <td class="lsize">${totalexpenses}</td>
-    <td>${totalcontarct - totalexpenses}</td>
+    <td>${totalcontarct - totalexpenses-taxes}</td>
     </tr>`;
     led += `</table>`;
     document.getElementById("tally").innerHTML = led;
